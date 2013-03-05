@@ -26,7 +26,7 @@ Or install it yourself as:
 require "rspec/absolutely_prepended_after_each"
 
 RSpec.configure do |config|
-  config.absolutely_prepend_after_each do
+  config.prepend_absolutely_after_each do
     # codes you'd like to execute before every after(:each) blocks
   end
 end
@@ -36,7 +36,7 @@ end
 require "rspec/absolutely_prepended_after_each"
 
 describe "some description" do
-  absoutely_prepend_after_each do
+  prepend_absoutely_after_each do
     # codes you'd like to execute before every after(:each) blocks below
   end
 
