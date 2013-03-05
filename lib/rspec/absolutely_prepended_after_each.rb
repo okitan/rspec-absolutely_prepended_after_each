@@ -1,19 +1,15 @@
 require "rspec"
 
-module Rspec::AbsolutelyPrependedAfterEach
-  def absolutely_prepended_after_each_flag_key
-    :absolutely_prepended_after_each
-  end
-
+module RSpec::AbsolutelyPrependedAfterEach
   def prepend_absolutely_after_each(*args, &block)
     around(:each, *args) do |ex|
-      exmple_group = example.example_group
+      example_group = example.example_group
 
       # if not after(:each) is called multiple times
-      unless example_group.metadata[absolutely_prepended_after_each_flag_key]
+      unless example_group.metadata[:absolutely_prepended_after_each]
         example_group.before(:each, *args, &block)
 
-        example_group.metadata[absolutely_prepended_after_each_flag_key] = true
+        example_group.metadata[:absolutely_prepended_after_each] = true
       end
 
       ex.run
@@ -21,8 +17,12 @@ module Rspec::AbsolutelyPrependedAfterEach
   end
 end
 
-module RSpec::Core::Hooks
-  class Hook
+module RSpec::Core
+  class ExampleGroup
+    extend ::RSpec::AbsolutelyPrependedAfterEach
+  end
+
+  class Configuration
     include ::RSpec::AbsolutelyPrependedAfterEach
   end
 end
