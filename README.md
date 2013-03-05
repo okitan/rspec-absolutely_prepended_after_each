@@ -1,6 +1,10 @@
-# Rspec::AbsolutelyPrependedAfterEach
+# Rspec::AbsolutelyPrependedAfterEach [![Build Status](https://travis-ci.org/okitan/rspec-absolutely_prepended_after_each.png)](https://travis-ci.org/okitan/rspec-absolutely_prepended_after_each) [![Dependency Status](https://gemnasium.com/okitan/rspec-absolutely_prepended_after_each.png)](https://gemnasium.com/okitan/rspec-absolutely_prepended_after_each)
 
-TODO: Write a gem description
+forcelly prepend at the top of the after:each
+
+
+It suits for example:
+ * take screen shot of selenium test BEFORE the teardown of after hooks
 
 ## Installation
 
@@ -18,7 +22,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "rspec/absolutely_prepended_after_each"
+
+RSpec.configure do |config|
+  config.absolutely_prepend_after_each do
+    # codes you'd like to execute before every after(:each) blocks
+  end
+end
+```
+
+```ruby
+require "rspec/absolutely_prepended_after_each"
+
+describe "some description" do
+  absoutely_prepend_after_each do
+    # codes you'd like to execute before every after(:each) blocks below
+  end
+
+  context "some context" do
+    after(:each) { "some teardown" }
+  end
+end
 
 ## Contributing
 
