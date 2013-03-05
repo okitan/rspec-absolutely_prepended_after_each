@@ -44,6 +44,7 @@ describe "some description" do
     after(:each) { "some teardown" }
   end
 end
+```
 
 ## Contributing
 
